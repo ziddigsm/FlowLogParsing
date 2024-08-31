@@ -4,4 +4,4 @@ node_modules/
 
 !launch.json
 
-.DS_Store
+!.DS_Store

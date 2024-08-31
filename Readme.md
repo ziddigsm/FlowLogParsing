@@ -86,10 +86,6 @@ A file named `result.csv` has been created in the `media/output` directory, cont
 - **Case Insensitivity**: Tags are treated as case-insensitive.
 - **File Formats**: The lookup table should be in CSV format, and the flowlog file should be in TXT format.
 
-
-TagCounts: Lists the count of each tag found in the flowlog.
-PortProtocolCombinationCounts: Lists the count of each port-protocol combination found in the flowlog.
-
 ### Lookup Table Example
 dstport,protocol,tag  
 25,tcp,sv_P1  
@@ -114,6 +110,11 @@ Port,Protocol,Count
 25,tcp,1  
 110,tcp,1
 
+### Tests/Validation Accomplished:
+- The code only considers logs with default format flow log (14 version 2 fields) Anything out of default format, for example:  a custom format flow log with more than 14 records will not be considered.
+- The validation of flowlog file size has been limited to 10MB. Anything more than 10MB will result in an error.
+- The lookup table can have only upto 10000 records in it. If it has more, an error will be generated.
+- It is made sure that tags and protocols are not case sensitive.
 ## How to Run
 
 ### Ensure Node.js is Installed:
@@ -139,7 +140,7 @@ Port,Protocol,Count
     ```bash
     node index.js
     ```
-
+    
 ### Test the API:
 - Open Postman, enter the API details provided above, and use the sample input file from the `media/inputsample` folder for reference. Upload the file when sending the request.
 
